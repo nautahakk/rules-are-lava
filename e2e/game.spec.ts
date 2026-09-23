@@ -90,6 +90,17 @@ async function expectAxeClean(page: Page) {
   expect(results.violations.filter(violation => violation.impact === 'serious' || violation.impact === 'critical')).toEqual([]);
 }
 
+test('uses square developer-tool framing', async ({ page }) => {
+  await mockGame(page);
+  await page.goto('/');
+
+  await expect(page.locator('.game-shell')).toHaveCSS('border-radius', '0px');
+  await expect(page.getByRole('button', { name: "Play today's challenge" })).toHaveCSS('border-radius', '0px');
+
+  await page.getByRole('button', { name: "Play today's challenge" }).click();
+  await expect(page.locator('.rule-card').first()).toHaveCSS('border-radius', '0px');
+});
+
 test('plays through verdicts, game over, leaderboard, and X sharing', async ({ page }) => {
   const submitted = await mockGame(page);
   await page.goto('/');
