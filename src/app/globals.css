@@ -304,8 +304,8 @@ h2 {
 }
 
 .rule-card:first-child:nth-last-child(4) {
-  opacity: 0.72;
   transform: translateX(-8px);
+  background: linear-gradient(90deg, var(--paper-dim), var(--paper) 40%);
 }
 
 .rule-index { color: var(--failure); }
@@ -503,13 +503,13 @@ h2 {
 .repository-link:hover { color: var(--lava); }
 
 @keyframes card-enter {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { transform: translateY(8px); }
+  to { transform: translateY(0); }
 }
 
 @keyframes verdict-enter {
-  from { opacity: 0; transform: translateX(-8px); }
-  to { opacity: 1; transform: translateX(0); }
+  from { transform: translateX(-8px); }
+  to { transform: translateX(0); }
 }
 
 @media (max-width: 640px) {
