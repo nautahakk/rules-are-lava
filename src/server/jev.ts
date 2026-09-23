@@ -18,6 +18,7 @@ type EvaluateOptions = {
   apiKey?: string;
   signal?: AbortSignal;
   Client?: ClientConstructor;
+  context?: { challengeDate: string; roundIndex: number };
 };
 
 export class JevUnavailableError extends Error {
@@ -63,7 +64,11 @@ export async function evaluateSemanticRules(
       timeout: 2500
     });
     const response = await client.systemOne({
-      state: { response: text, rules: rules.map(({ id, label }) => ({ id, label })) },
+      state: {
+        response: text,
+        rules: rules.map(({ id, label }) => ({ id, label })),
+        ...options.context
+      },
       questions
     }, {
       signal: options.signal,
